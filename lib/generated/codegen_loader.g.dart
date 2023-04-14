@@ -17,6 +17,7 @@ class CodegenLoader extends AssetLoader{
   static const Map<String,dynamic> en = {
   "appName": "Recepes",
   "home": {
+    "date": "Date",
     "bottomWidget": {
       "today": "TODAY"
     }

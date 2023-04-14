@@ -1,9 +1,11 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:recipes/core/constants/general_constants.dart';
 import 'package:recipes/core/general_widgets/button_widget.dart';
 import 'package:recipes/core/general_widgets/custom_list_space.dart';
+import 'package:recipes/generated/locale_keys.g.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
 
 class CustomBottomSheetWidget extends StatelessWidget {
@@ -35,7 +37,7 @@ class CustomBottomSheetWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomButton(label: "TODAY", onPressed: (){
+            CustomButton(label: LocaleKeys.home_bottomWidget_today.tr(), onPressed: (){
               DateTime now = DateTime.now();
               onSelectToday(now);
             }, backgroundColor: Colors.teal, borderColor: Colors.teal, primaryTextTheme: primaryTextTheme),

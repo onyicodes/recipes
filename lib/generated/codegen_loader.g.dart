@@ -18,6 +18,9 @@ class CodegenLoader extends AssetLoader{
   "appName": "Recepes",
   "home": {
     "date": "Date",
+    "homeAppBarTitle": "My Ingredients",
+    "recipesAppBarTile": "Recipes",
+    "findRecipes": "Find Recipes",
     "bottomWidget": {
       "today": "TODAY"
     }

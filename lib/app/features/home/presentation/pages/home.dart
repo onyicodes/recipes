@@ -1,40 +1,47 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
 import 'package:recipes/app/features/home/presentation/controllers/home_controller.dart';
+import 'package:recipes/app/features/home/presentation/widgets/ingredient_builder.dart';
+import 'package:recipes/app/features/home/presentation/widgets/ingredient_card.dart';
+import 'package:recipes/core/general_widgets/custom_appbar.dart';
 import 'package:recipes/generated/locale_keys.g.dart';
 
 class Home extends GetView<HomeController> {
   Home({Key? key}) : super(key: key);
-  
-  
+
   @override
   Widget build(BuildContext context) {
-    return   Scaffold(
-            
-            body: GetBuilder<HomeController>(
-              builder: (_) {
-                return ListView(
-                  children: [
-                    Row(children: [
-                     const Text(LocaleKeys.home_date),
-                    GetX<HomeController>(
-              builder: (_) {
-                         return Text(DateFormat.yMd(context.locale).format(_.date) );
-                       }
-                     ),
-
-                     
-                    ],)
-                  ],
-                );
-              }
-            )
-          );
-
-          
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
+    return Scaffold(
+      appBar: customAppBar(title: LocaleKeys.home_homeAppBarTitle.tr(), primaryTextTheme: primaryTextTheme, onAppBarTap: (){
+        Get.back();
+      }),
+        floatingActionButton: GetBuilder<HomeController>(builder: (_) {
+      return FloatingActionButton(
+        onPressed: () {
+          _.getRecipes();
+        },
+        child: Text(
+          LocaleKeys.home_findRecipes.tr(),
+          style: primaryTextTheme.headlineMedium,
+        ),
+      );
+    }), body: GetBuilder<HomeController>(builder: (_) {
+      return ListView(
+        children: [
+          Row(
+            children: [
+             Text(LocaleKeys.home_date.tr()),
+              GetX<HomeController>(builder: (_) {
+                return Text(DateFormat.yMd(context.locale).format(_.date));
+              }),
+             
+            ],
+          ),
+         const IngredientBuilder()
+        ],
+      );
+    }));
   }
-
-  
 }
-

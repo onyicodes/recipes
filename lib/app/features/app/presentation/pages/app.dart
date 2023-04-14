@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
@@ -13,9 +14,10 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.initial,
       initialBinding: SplashBinding(),
+      supportedLocales: context.localizationDelegates as Iterable<Locale>,
       defaultTransition: Transition.fade,
       getPages: AppPages.pages,
-      locale:const  Locale('en', 'US'),
+      locale:context.locale,
     );
   }
 }

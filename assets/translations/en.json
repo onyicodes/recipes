@@ -1,3 +1,4 @@
 {
-    "appName": "Recepes"
+    "appName": "Recepes",
+    "home":{"bottomWidget":{"today":"TODAY"}}
 }

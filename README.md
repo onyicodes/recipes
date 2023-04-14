@@ -67,3 +67,11 @@ A few resources to get you started if this is your first Flutter project:
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
 For help getting started with Flutter, view [online documentation](https://flutter.dev/docs), which offers tutorials, samples, guidance on mobile development, and a full API reference.
+
+
+
+## easy_localization setup
+To user easy_localization setup run the following codes
+`flutter pub run easy_localization:generate --source-dir assets/translations` - This will generate the codegen loader file 
+`flutter pub run easy_localization:generate -S assets/translations -f keys -o locale_keys.g.dart` - this will generate the necessary Locale keys
+

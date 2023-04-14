@@ -10,6 +10,7 @@ AppBar customAppBar(
     double toolbarHeight = 70,
     bool automaticallyImplyLeading = true,
     bool centerTitle = false,
+    PreferredSizeWidget? bottom,
     List<Widget> actions = const <Widget>[],
     required TextTheme primaryTextTheme,
     required void Function() onAppBarTap}) {
@@ -21,6 +22,7 @@ AppBar customAppBar(
     centerTitle: logoTitle ? true : centerTitle,
     actions: actions,
     automaticallyImplyLeading: automaticallyImplyLeading,
+    bottom: bottom,
     leading: automaticallyImplyLeading
         ? Padding(
             padding: EdgeInsets.symmetric(
@@ -29,6 +31,7 @@ AppBar customAppBar(
             ),
             child:  GestureDetector(
       onTap: onAppBarTap,
+      
       child: Container(
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(

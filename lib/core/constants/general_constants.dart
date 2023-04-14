@@ -6,8 +6,11 @@ enum ListSpacingValue {
   spacingV32(32),
   spacingV24(24),
   spacingV16(16),
-  spacingH8(8);
+  spacingV8(8);
 
   const ListSpacingValue(this.value);
   final double value;
 }
+
+
+enum RequestStatus { initial, loading, success, error }

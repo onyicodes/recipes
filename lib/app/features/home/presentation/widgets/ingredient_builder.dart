@@ -13,14 +13,21 @@ class IngredientBuilder extends StatelessWidget {
     return GetX<HomeController>(
       builder: (_) {
         return ListView.separated(
-          itemCount: _.ingredients.length,
-          separatorBuilder: ((context, index) => CustomListSpacing(
-              spacingValue: ListSpacingValue.spacingV16.value)
-        ), itemBuilder: (context, index) {
-          return IngredientCard(
-              selected: _.selectedIngredient.contains(_.ingredients[index]),
-              ingredientTitle: _.ingredients[index]);
-        });
+            shrinkWrap: true,
+            itemCount: _.ingredients.length,
+            separatorBuilder: ((context, index) => CustomListSpacing(
+                spacingValue: ListSpacingValue.spacingV8.value)),
+            itemBuilder: (context, index) {
+              return GetX<HomeController>(builder: (_) {
+                return IngredientCard(
+                    onSelect: (value) {
+                      _.addSelectedIngredient(value);
+                    },
+                    selected:
+                        _.selectedIngredients.contains(_.ingredients[index]),
+                    ingredientTitle: _.ingredients[index]);
+              });
+            });
       },
     );
   }

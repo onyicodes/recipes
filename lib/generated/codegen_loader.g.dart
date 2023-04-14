@@ -18,12 +18,15 @@ class CodegenLoader extends AssetLoader{
   "appName": "Recepes",
   "home": {
     "date": "Date",
-    "homeAppBarTitle": "My Ingredients",
-    "recipesAppBarTile": "Recipes",
+    "appBarTitle": "My Ingredients",
     "findRecipes": "Find Recipes",
     "bottomWidget": {
       "today": "TODAY"
     }
+  },
+  "recipe": {
+    "appBarTile": "Recipes",
+    "ingredient": "Ingredients"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en};

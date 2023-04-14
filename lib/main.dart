@@ -8,10 +8,10 @@ void main() async {
   await EasyLocalization.ensureInitialized();
 
   runApp(EasyLocalization(
-      supportedLocales: const [Locale('en', 'US')],
+      supportedLocales: const [Locale('en')],
       path:
-          'assets/translations', // <-- change the path of the translation files
-      fallbackLocale: const Locale('en', 'US'),
+          'assets/translations/', // <-- change the path of the translation files
+      fallbackLocale: const Locale('en'),
       assetLoader: const CodegenLoader(),
       child: const App()));
 }

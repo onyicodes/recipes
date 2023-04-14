@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
+import 'package:recipes/app/routes/app_pages.dart';
 
 class SplashScreenController extends GetxController {
-
-  
-
   SplashScreenController();
 
   @override
@@ -16,7 +14,7 @@ class SplashScreenController extends GetxController {
 
   Future<void> loading() async {
     Timer(const Duration(seconds: 3), () {
-     //exit to home page
+      Get.offAndToNamed(Routes.home);
     });
   }
 }

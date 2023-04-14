@@ -2,8 +2,11 @@
     "appName": "Recepes",
     "home":{
         "date":"Date",
-        "homeAppBarTitle":"My Ingredients",
-        "recipesAppBarTile":"Recipes",
+        "appBarTitle":"My Ingredients",
         "findRecipes": "Find Recipes",
-        "bottomWidget":{"today":"TODAY"}}
+        "bottomWidget":{"today":"TODAY"}},
+    "recipe": {
+        "appBarTile": "Recipes",
+        "ingredient": "Ingredients"
+    }
 }

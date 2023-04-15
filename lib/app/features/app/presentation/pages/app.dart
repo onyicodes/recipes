@@ -17,7 +17,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.initial,
       initialBinding: SplashBinding(),
-      theme: RecipesAppTheme.light(),
+      theme: RecipesAppTheme.dark(),
       darkTheme: RecipesAppTheme.dark(),
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,

@@ -32,10 +32,10 @@ class CustomBottomSheetWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(8),
         height: 300,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(16), topRight: Radius.circular(16)),
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

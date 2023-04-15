@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:recipes/core/constants/assets_constants.dart';
 import 'package:recipes/core/constants/general_constants.dart';
 import 'package:recipes/core/general_widgets/custom_list_space.dart';
 import 'package:recipes/generated/locale_keys.g.dart';
@@ -23,9 +24,7 @@ class ErrorHandlerWidget extends StatelessWidget {
         ),
         Align(
           alignment: Alignment.center,
-          child: SizedBox(
-              width: 100,
-              child: selectIcon(message: message)),
+          child: SizedBox(width: 100, child: selectIcon(message: message)),
         ),
         const SizedBox(
           height: 30,
@@ -42,34 +41,35 @@ class ErrorHandlerWidget extends StatelessWidget {
         ),
         Align(
             alignment: Alignment.center,
-            child: TextButton(onPressed: onReload, child: Text(LocaleKeys.button_reload.tr()))),
+            child: TextButton(
+                onPressed: onReload,
+                child: Text(LocaleKeys.button_reload.tr()))),
         CustomListSpacing(spacingValue: ListSpacingValue.spacingV24.value)
       ],
     );
   }
 
   Widget selectIcon({required String message}) {
-    switch (message) {
-      case LocaleKeys.error_networkError:
-        return SvgPicture.asset(
-          'assets/svg_icons/error_icons/connection_error_svg.svg',
-          width: 150,
-        );
-      case LocaleKeys.error_unknownError:
-        return Image.asset(
-          'assets/svg/error_icons/unknown_error_emoji.png',
-          width: 100,
-        );
-      case LocaleKeys.error_noResultError:
-        return Image.asset(
-          'assets/svg/error_icons/result_not_found_emoji.png',
-          width: 100,
-        );
-      default:
-        return const Icon(
-          Icons.error,
-          size: 60,
-        );
+    if (message == LocaleKeys.error_networkError.tr()) {
+      return SvgPicture.asset(
+        AssetsConstants.connectionErrorSvgIcon,
+        width: 150,
+      );
+    } else if (message == LocaleKeys.error_noResultError.tr()) {
+      return Image.asset(
+        AssetsConstants.notFoundErrorImage,
+        width: 100,
+      );
+    } else if (message == LocaleKeys.error_noResultError.tr()) {
+      return Image.asset(
+        AssetsConstants.unknownErrorImage,
+        width: 100,
+      );
+    } else {
+      return const Icon(
+        Icons.error,
+        size: 60,
+      );
     }
   }
 }

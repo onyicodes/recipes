@@ -2,12 +2,14 @@
 
 abstract class  LocaleKeys {
   static const appName = 'appName';
+  static const snackBar_expiredDeals = 'snackBar.expiredDeals';
+  static const snackBar_selectIngredient = 'snackBar.selectIngredient';
+  static const snackBar = 'snackBar';
   static const home_date = 'home.date';
   static const home_useby = 'home.useby';
-  static const home_appBarTitle = 'home.appBarTitle';
+  static const home_ingredientsTitle = 'home.ingredientsTitle';
   static const home_toolTip_findRecipes = 'home.toolTip.findRecipes';
   static const home_toolTip = 'home.toolTip';
-  static const home_selectIngredient = 'home.selectIngredient';
   static const home_bottomWidget_today = 'home.bottomWidget.today';
   static const home_bottomWidget = 'home.bottomWidget';
   static const home = 'home';

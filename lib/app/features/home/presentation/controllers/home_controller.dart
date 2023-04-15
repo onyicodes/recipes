@@ -1,16 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:recipes/app/features/home/domain/entities/ingredients_entity.dart';
-import 'package:recipes/app/features/home/domain/entities/recipe_entity.dart';
 import 'package:recipes/app/features/home/domain/usecases/fetch_ingredients_usecase.dart';
-import 'package:recipes/app/features/home/domain/usecases/fetch_recipes_usecase.dart';
 import 'package:recipes/app/features/home/presentation/widgets/buttom_widget.dart';
 import 'package:recipes/app/routes/app_pages.dart';
 import 'package:recipes/core/constants/failure_to_error_message.dart';
 import 'package:recipes/core/constants/general_constants.dart';
-import 'package:recipes/core/parameters/fetch_recipe_params.dart';
+import 'package:recipes/core/general_widgets/custom_snackbar.dart';
 import 'package:recipes/core/parameters/no_params.dart';
-import 'package:recipes/core/util/custom_smart_loading.dart';
 import 'package:recipes/generated/locale_keys.g.dart';
 
 class HomeController extends GetxController {
@@ -53,6 +50,7 @@ class HomeController extends GetxController {
     await Get.bottomSheet(CustomBottomSheetWidget(
         onSelectToday: (value) {
           date = dateFormatter.format(value);
+          Get.back();
         },
         onCanel: () {
           Get.back();
@@ -71,11 +69,15 @@ class HomeController extends GetxController {
     selectedIngredients.remove(value);
   }
 
-  addSelectedIngredient(String ingredientTitle) {
-    if (selectedIngredients.contains(ingredientTitle)) {
-      selectedIngredients.remove(ingredientTitle);
+  addSelectedIngredient({required String ingredient, required bool isExpired}) {
+    if (isExpired) {
+      customSnackbar(title: "", message: LocaleKeys.snackBar_expiredDeals.tr());
     } else {
-      selectedIngredients.add(ingredientTitle);
+      if (selectedIngredients.contains(ingredient)) {
+        selectedIngredients.remove(ingredient);
+      } else {
+        selectedIngredients.add(ingredient);
+      }
     }
   }
 
@@ -84,19 +86,26 @@ class HomeController extends GetxController {
     final failOrFetchIngredients = await fetchIngredientsUsecase(NoParams());
     failOrFetchIngredients.fold((fail) {
       ingredientsRequestStatus = RequestStatus.error;
-
-      //Get.snackbar("Error", mapFailureToErrorMessage(fail));
+      errorMessage = mapFailureToErrorMessage(fail);
+      //Comment snackbar below out for unit test to run smoothly
+      customSnackbar(title: "Error", message: mapFailureToErrorMessage(fail), isError: true);
     }, (ingredientsList) {
       ingredients = ingredientsList;
       ingredientsRequestStatus = RequestStatus.success;
     });
   }
 
+  bool ingredientExpired({required String useby}) {
+    return DateTime.parse(useby).isBefore(dateFormatter.parse(date));
+  }
+
   goToRecipes() {
     if (selectedIngredients.isEmpty) {
-      Get.snackbar("", LocaleKeys.home_selectIngredient.tr());
+      customSnackbar(
+          title: "Error", message: LocaleKeys.snackBar_selectIngredient.tr(), isError: true);
     } else {
       Get.toNamed(Routes.recipes, arguments: selectedIngredients);
+      selectedIngredients.clear();
     }
   }
 }

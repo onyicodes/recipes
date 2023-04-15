@@ -18,7 +18,7 @@ abstract class AppPages {
         name: Routes.home,
         page: () =>const Home(),
         binding: HomeBinding(),
-        transition: Transition.leftToRightWithFade),
+        transition: Transition.leftToRight),
     GetPage(
         name: Routes.recipes,
         page: () =>const RecipesPage(),

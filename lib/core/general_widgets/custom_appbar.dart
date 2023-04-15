@@ -15,10 +15,10 @@ AppBar customAppBar(
     required TextTheme primaryTextTheme,
     required void Function() onAppBarTap}) {
   return AppBar(
-    title:  Text(
-            title,
-            style: primaryTextTheme.displayMedium,
-          ),
+    title: Text(
+      title,
+      style: primaryTextTheme.displayMedium,
+    ),
     centerTitle: logoTitle ? true : centerTitle,
     actions: actions,
     automaticallyImplyLeading: automaticallyImplyLeading,
@@ -29,19 +29,20 @@ AppBar customAppBar(
               horizontal: 6.0,
               vertical: logoTitle ? 24 : 10,
             ),
-            child:  GestureDetector(
-      onTap: onAppBarTap,
-      
-      child: Container(
-        padding: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.lightBlue,
+            child: GestureDetector(
+              onTap: onAppBarTap,
+              child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.lightBlue,
+                      ),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(12))),
+                  child: SvgPicture.asset(
+                    AssetsConstants.backArrowIconSvg,
+                  )),
             ),
-            borderRadius: const BorderRadius.all(Radius.circular(12))),
-        child: SvgPicture.asset(AssetsConstants.backArrowIcon,)
-      ),
-    ),
           )
         : null,
     elevation: logoTitle ? 0 : elevation,

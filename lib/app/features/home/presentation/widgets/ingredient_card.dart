@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:recipes/generated/locale_keys.g.dart';
 
 class IngredientCard extends StatelessWidget {
-  final bool selected;
-  final String ingredientTitle;
-  final String useby;
+  final bool selected, expired;
+  final String ingredientTitle,  useby;
   final void Function(String value) onSelect;
   const IngredientCard(
       {super.key,
       required this.selected,
       required this.onSelect,
+      required this.expired,
       required this.useby,
       required this.ingredientTitle});
 
@@ -43,7 +43,7 @@ class IngredientCard extends StatelessWidget {
                     blurRadius: 6,
                     spreadRadius: 1)
               ],
-              color: selected ? null : Theme.of(context).cardColor,
+              color: selected ? null : expired?Theme.of(context).cardColor.withAlpha(160) : Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(20)),
           child: Padding(
             padding: const EdgeInsets.all(12.0),

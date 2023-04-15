@@ -15,15 +15,18 @@ class CodegenLoader extends AssetLoader{
   }
 
   static const Map<String,dynamic> en = {
-  "appName": "Recepes",
+  "appName": "My Recipes App",
+  "snackBar": {
+    "expiredDeals": "Expired ingredients cannot be selected, check useby date",
+    "selectIngredient": "Select ingredients to proceed"
+  },
   "home": {
     "date": "Date",
     "useby": "use by",
-    "appBarTitle": "My Ingredients",
+    "ingredientsTitle": "My Ingredients",
     "toolTip": {
       "findRecipes": "Find Recipes"
     },
-    "selectIngredient": "Select ingredients to proceed",
     "bottomWidget": {
       "today": "TODAY"
     }

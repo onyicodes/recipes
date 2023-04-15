@@ -14,28 +14,39 @@ class IngredientBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetX<HomeController>(
       builder: (_) {
-        return _.ingredientsRequestStatus == RequestStatus.success?
-         ListView.separated(
-            shrinkWrap: true,
-            itemCount: _.ingredients.length,
-            physics: NeverScrollableScrollPhysics(),
-            separatorBuilder: ((context, index) => CustomListSpacing(
-                spacingValue: ListSpacingValue.spacingV8.value)),
-            itemBuilder: (context, index) {
-              return GetX<HomeController>(builder: (_) {
-                return IngredientCard(
-                  useby:_.ingredients[index].useby ,
-                    onSelect: (value) {
-                      _.addSelectedIngredient(value);
-                    },
-                    selected:
-                        _.selectedIngredients.contains(_.ingredients[index].title),
-                    ingredientTitle: _.ingredients[index].title);
-              });
-            }): _.ingredientsRequestStatus == RequestStatus.loading? CustomSimpleLoadingWidget():
-            _.ingredientsRequestStatus == RequestStatus.error? ErrorHandlerWidget(message: _.errorMessage, onReload: (){
-              _.getIngredients();
-            }):const SizedBox.shrink();
+        return _.ingredientsRequestStatus == RequestStatus.success
+            ? ListView.separated(
+                shrinkWrap: true,
+                itemCount: _.ingredients.length,
+                physics: NeverScrollableScrollPhysics(),
+                separatorBuilder: ((context, index) => CustomListSpacing(
+                    spacingValue: ListSpacingValue.spacingV8.value)),
+                itemBuilder: (context, index) {
+                  final ingredientIsExpired =
+                      _.ingredientExpired(useby: _.ingredients[index].useby);
+                  return GetX<HomeController>(builder: (_) {
+                    return IngredientCard(
+                        useby: _.ingredients[index].useby,
+                        expired: ingredientIsExpired,
+                        onSelect: (value) {
+                          _.addSelectedIngredient(ingredient: value, isExpired:ingredientIsExpired);
+                        },
+                        selected: _.selectedIngredients
+                            .contains(_.ingredients[index].title),
+                        ingredientTitle: _.ingredients[index].title);
+                  });
+                })
+            : _.ingredientsRequestStatus == RequestStatus.loading
+                ?  SizedBox(
+                  height: MediaQuery.of(context).size.height - ListSpacingValue.spacingV100.value,
+                  child: CustomSimpleLoadingWidget())
+                : _.ingredientsRequestStatus == RequestStatus.error
+                    ? ErrorHandlerWidget(
+                        message: _.errorMessage,
+                        onReload: () {
+                          _.getIngredients();
+                        })
+                    : const SizedBox.shrink();
       },
     );
   }

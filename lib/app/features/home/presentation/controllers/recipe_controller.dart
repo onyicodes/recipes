@@ -3,9 +3,8 @@ import 'package:recipes/app/features/home/domain/entities/recipe_entity.dart';
 import 'package:recipes/app/features/home/domain/usecases/fetch_recipes_usecase.dart';
 import 'package:recipes/core/constants/failure_to_error_message.dart';
 import 'package:recipes/core/constants/general_constants.dart';
+import 'package:recipes/core/general_widgets/custom_snackbar.dart';
 import 'package:recipes/core/parameters/fetch_recipe_params.dart';
-import 'package:recipes/core/util/custom_smart_loading.dart';
-import 'package:recipes/generated/locale_keys.g.dart';
 
 class RecipeController extends GetxController {
   final FetchRecipesUsecase fetchRecipesUsecase;
@@ -42,7 +41,8 @@ class RecipeController extends GetxController {
     failOrFetchRecipes.fold((fail) {
       recipesRequestStatus = RequestStatus.error;
      errorMessage = mapFailureToErrorMessage(fail);
-
+      //Comment snackbar below out for unit test to run smoothly
+      customSnackbar(title: "Error", message: mapFailureToErrorMessage(fail), isError: true);
       
     }, (recipesList) {
       recipes = recipesList;

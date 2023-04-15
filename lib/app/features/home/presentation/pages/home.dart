@@ -16,7 +16,8 @@ class Home extends GetView<HomeController> {
     TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
     return Scaffold(
         appBar: customAppBar(
-            title: LocaleKeys.home_appBarTitle.tr(),
+          automaticallyImplyLeading: false,
+            title: LocaleKeys.appName.tr(),
             primaryTextTheme: primaryTextTheme,
             onAppBarTap: () {
               Get.back();
@@ -75,6 +76,15 @@ class Home extends GetView<HomeController> {
                   ],
                 ),
               ),
+              CustomListSpacing(spacingValue: ListSpacingValue.spacingV24.value),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal:16.0),
+                child: Text(
+                        LocaleKeys.home_ingredientsTitle.tr(),
+                        style: primaryTextTheme.displaySmall,
+                      ),
+              ),
+                CustomListSpacing(spacingValue: ListSpacingValue.spacingV24.value),
               const IngredientBuilder(),
               CustomListSpacing(spacingValue: ListSpacingValue.spacingV32.value)
             ],

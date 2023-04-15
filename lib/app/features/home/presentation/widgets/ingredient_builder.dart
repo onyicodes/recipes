@@ -24,8 +24,8 @@ class IngredientBuilder extends StatelessWidget {
                       _.addSelectedIngredient(value);
                     },
                     selected:
-                        _.selectedIngredients.contains(_.ingredients[index]),
-                    ingredientTitle: _.ingredients[index]);
+                        _.selectedIngredients.contains(_.ingredients[index].title),
+                    ingredientTitle: _.ingredients[index].title);
               });
             });
       },

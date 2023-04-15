@@ -21,10 +21,11 @@ class HomeDataProviderImpl extends HomeDataProvider {
   @override
   Future<List<RecipeEntity>> fetchRecipes(
       {required FetchRecipeParams params}) async {
-    Map<String, dynamic> queryParams = params.toMap();
-    const String recipesUrl = ApiUrls.baseUrl + ApiUrls.recipes;
+    
 
     if (await networkInfo.isConnected) {
+      Map<String, dynamic> queryParams = params.toMap();
+    const String recipesUrl = ApiUrls.baseUrl + ApiUrls.recipes;
       final Response response = await get(
         recipesUrl,
         query: queryParams,

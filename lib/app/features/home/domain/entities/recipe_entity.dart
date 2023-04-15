@@ -7,7 +7,7 @@ class RecipeEntity extends Equatable {
   });
 
   final String title;
-  final List<String> ingredients;
+  final List ingredients;
 
   @override
   List<Object?> get props => [

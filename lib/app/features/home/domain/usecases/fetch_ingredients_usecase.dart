@@ -5,10 +5,10 @@ import 'package:recipes/core/error/failures.dart';
 import 'package:recipes/core/parameters/no_params.dart';
 import 'package:recipes/core/usecase/usecase_builder.dart';
 
-class FetchDealDetailsUsecase extends UseCase<List<IngredientEntity>, NoParams> {
+class FetchIngredientsUsecase extends UseCase<List<IngredientEntity>, NoParams> {
   final HomeRepository repository;
 
-  FetchDealDetailsUsecase({required this.repository});
+  FetchIngredientsUsecase({required this.repository});
 
   @override
   Future<Either<Failure, List<IngredientEntity>>> call(NoParams params) async {

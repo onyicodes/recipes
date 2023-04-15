@@ -6,10 +6,10 @@ import 'package:recipes/core/parameters/fetch_recipe_params.dart';
 import 'package:recipes/core/usecase/usecase_builder.dart';
 
 
-class FetchDealDetailsUsecase extends UseCase<List<RecipeEntity>, FetchRecipeParams> {
+class FetchRecipesUsecase extends UseCase<List<RecipeEntity>, FetchRecipeParams> {
   final HomeRepository repository;
 
-  FetchDealDetailsUsecase({required this.repository});
+  FetchRecipesUsecase({required this.repository});
 
   @override
   Future<Either<Failure, List<RecipeEntity>>> call(FetchRecipeParams params) async {

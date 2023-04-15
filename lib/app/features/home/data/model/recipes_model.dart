@@ -4,7 +4,7 @@ import 'package:recipes/app/features/home/domain/entities/recipe_entity.dart';
 
 class RecipeModel extends RecipeEntity {
   final String title;
-  final List<String> ingredients;
+  final List ingredients;
 
   const RecipeModel({required this.title, required this.ingredients})
       : super(title: title, ingredients: ingredients);

@@ -3,7 +3,8 @@
 import 'package:recipes/app/features/home/domain/entities/ingredients_entity.dart';
 
 class IngredientModel extends IngredientEntity {
-  final String title, useby;
+  final String title;
+  final String useby;
 
   const IngredientModel({required this.title, required this.useby})
       : super(title: title, useby: useby);

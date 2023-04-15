@@ -24,7 +24,7 @@ class Home extends GetView<HomeController> {
             backgroundColor: Theme.of(context).iconTheme.color,
             tooltip: LocaleKeys.home_findRecipes.tr(),
             onPressed: () {
-              _.getRecipes();
+              _.goToRecipes();
             },
             child: const Padding(
               padding: EdgeInsets.all(8.0),
@@ -47,20 +47,22 @@ class Home extends GetView<HomeController> {
                     ),
                     GetX<HomeController>(builder: (_) {
                       return TextButton(
-                        
                         onPressed: () {
                           _.datePicker();
                         },
                         child: Container(
-                          padding:const EdgeInsets.symmetric(horizontal:12.0, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12.0, vertical: 8),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).cardColor,
-                            boxShadow:[BoxShadow(
-                    color: Theme.of(context).shadowColor,
-                    blurRadius: 2,
-                    spreadRadius: 1)] ,
-                            borderRadius: BorderRadius.all(Radius.circular(12))
-                          ),
+                              color: Theme.of(context).cardColor,
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Theme.of(context).shadowColor,
+                                    blurRadius: 2,
+                                    spreadRadius: 1)
+                              ],
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(12))),
                           child: Text(
                             _.date.toIso8601String(),
                             style: primaryTextTheme.bodyLarge,

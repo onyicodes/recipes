@@ -4,8 +4,10 @@ import 'package:get/get.dart' hide Trans;
 import 'package:recipes/app/features/home/presentation/controllers/home_controller.dart';
 import 'package:recipes/app/features/home/presentation/widgets/ingredient_builder.dart';
 import 'package:recipes/core/constants/general_constants.dart';
+import 'package:recipes/core/general_widgets/button_widget.dart';
 import 'package:recipes/core/general_widgets/custom_appbar.dart';
 import 'package:recipes/core/general_widgets/custom_list_space.dart';
+import 'package:recipes/core/general_widgets/theme_dialog_widget.dart';
 import 'package:recipes/generated/locale_keys.g.dart';
 
 class Home extends GetView<HomeController> {
@@ -16,7 +18,7 @@ class Home extends GetView<HomeController> {
     TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
     return Scaffold(
         appBar: customAppBar(
-          automaticallyImplyLeading: false,
+            automaticallyImplyLeading: false,
             title: LocaleKeys.appName.tr(),
             primaryTextTheme: primaryTextTheme,
             onAppBarTap: () {
@@ -76,15 +78,17 @@ class Home extends GetView<HomeController> {
                   ],
                 ),
               ),
-              CustomListSpacing(spacingValue: ListSpacingValue.spacingV24.value),
+              CustomListSpacing(
+                  spacingValue: ListSpacingValue.spacingV24.value),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal:16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
-                        LocaleKeys.home_ingredientsTitle.tr(),
-                        style: primaryTextTheme.displaySmall,
-                      ),
+                  LocaleKeys.home_ingredientsTitle.tr(),
+                  style: primaryTextTheme.displaySmall,
+                ),
               ),
-                CustomListSpacing(spacingValue: ListSpacingValue.spacingV24.value),
+              CustomListSpacing(
+                  spacingValue: ListSpacingValue.spacingV24.value),
               const IngredientBuilder(),
               CustomListSpacing(spacingValue: ListSpacingValue.spacingV32.value)
             ],

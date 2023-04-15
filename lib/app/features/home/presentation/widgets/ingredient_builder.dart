@@ -37,8 +37,8 @@ class IngredientBuilder extends StatelessWidget {
                   });
                 })
             : _.ingredientsRequestStatus == RequestStatus.loading
-                ?  SizedBox(
-                  height: MediaQuery.of(context).size.height - ListSpacingValue.spacingV100.value,
+                ?  Padding(
+                  padding: EdgeInsets.only(top: ListSpacingValue.spacingV100.value),
                   child: CustomSimpleLoadingWidget())
                 : _.ingredientsRequestStatus == RequestStatus.error
                     ? ErrorHandlerWidget(

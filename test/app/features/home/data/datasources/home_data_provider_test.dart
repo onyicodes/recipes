@@ -25,7 +25,7 @@ void main() {
     sut = HomeDataProviderImpl(networkInfo: mockNetworkInfo);
   });
 
-  const fetchRecipeParams = FetchRecipeParams(ingredients: ["Ham"]);
+  const fetchRecipeParams = FetchRecipeParams(ingredients: "Ham");
 
   test('should check if the device is online', () {
     //arrange

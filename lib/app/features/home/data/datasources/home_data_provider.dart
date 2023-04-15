@@ -21,26 +21,24 @@ class HomeDataProviderImpl extends HomeDataProvider {
   @override
   Future<List<RecipeEntity>> fetchRecipes(
       {required FetchRecipeParams params}) async {
-    
-
     if (await networkInfo.isConnected) {
       Map<String, dynamic> queryParams = params.toMap();
-    const String recipesUrl = ApiUrls.baseUrl + ApiUrls.recipes;
+      const String recipesUrl = ApiUrls.baseUrl + ApiUrls.recipes;
       final Response response = await get(
         recipesUrl,
         query: queryParams,
       );
 
-
       if (response.statusCode == 200) {
-        final List<Map<String, dynamic>> jsonString;
+       
+        final List<dynamic> jsonString;
         jsonString = response.body;
-        final List<RecipeModel> dealsModesList = [];
+        final List<RecipeModel> recipesModesList = [];
         for (Map<String, dynamic> recipe in jsonString) {
-          dealsModesList.add(RecipeModel.fromMap(recipe));
+          recipesModesList.add(RecipeModel.fromMap(recipe));
         }
 
-        return dealsModesList;
+        return recipesModesList;
       } else if (response.statusCode == 400) {
         throw BadRequestException();
       } else if (response.statusCode == 404) {
@@ -56,7 +54,6 @@ class HomeDataProviderImpl extends HomeDataProvider {
       throw NetworkException();
     }
   }
-
 
   @override
   Future<List<IngredientModel>> fetchIngredients() async {
@@ -67,17 +64,15 @@ class HomeDataProviderImpl extends HomeDataProvider {
         ingredientsUrl,
       );
 
-      
-
       if (response.statusCode == 200) {
-        final List<Map<String, dynamic>> jsonString;
+        final List<dynamic> jsonString;
         jsonString = response.body;
-        final List<IngredientModel> dealsModesList = [];
+        final List<IngredientModel> recipesModesList = [];
         for (Map<String, dynamic> recipe in jsonString) {
-          dealsModesList.add(IngredientModel.fromMap(recipe));
+          recipesModesList.add(IngredientModel.fromMap(recipe));
         }
 
-        return dealsModesList;
+        return recipesModesList;
       } else if (response.statusCode == 400) {
         throw BadRequestException();
       } else if (response.statusCode == 404) {
@@ -93,5 +88,4 @@ class HomeDataProviderImpl extends HomeDataProvider {
       throw NetworkException();
     }
   }
-
 }

@@ -18,8 +18,12 @@ class CodegenLoader extends AssetLoader{
   "appName": "Recepes",
   "home": {
     "date": "Date",
+    "useby": "use by",
     "appBarTitle": "My Ingredients",
-    "findRecipes": "Find Recipes",
+    "toolTip": {
+      "findRecipes": "Find Recipes"
+    },
+    "selectIngredient": "Select ingredients to proceed",
     "bottomWidget": {
       "today": "TODAY"
     }
@@ -27,6 +31,21 @@ class CodegenLoader extends AssetLoader{
   "recipe": {
     "appBarTile": "Recipes",
     "ingredient": "Ingredients"
+  },
+  "loading": "Loading...",
+  "error": {
+    "networkError": "Connection error",
+    "serverError": "Server error occurred",
+    "noResultError": "Result not found",
+    "unknownError": "an unknown error occurred",
+    "forBiddenError": "you don't have permission to access this resource",
+    "badRequest": "Bad request"
+  },
+  "button": {
+    "reload": "Reload",
+    "today": "SELECT TODAY",
+    "cancel": "CANCEL",
+    "done": "DONE"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en};

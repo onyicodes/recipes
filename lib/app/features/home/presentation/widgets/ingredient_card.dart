@@ -1,13 +1,17 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:recipes/generated/locale_keys.g.dart';
 
 class IngredientCard extends StatelessWidget {
   final bool selected;
   final String ingredientTitle;
+  final String useby;
   final void Function(String value) onSelect;
   const IngredientCard(
       {super.key,
       required this.selected,
       required this.onSelect,
+      required this.useby,
       required this.ingredientTitle});
 
   @override
@@ -43,12 +47,19 @@ class IngredientCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(20)),
           child: Padding(
             padding: const EdgeInsets.all(12.0),
-            child: Center(
-                child: Text(
-              ingredientTitle,
-              style: primaryTextTheme.headlineLarge!
-                  .copyWith(color: selected ? Colors.white : null),
-            )),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Center(
+                    child: Text(
+                  ingredientTitle,
+                  style: primaryTextTheme.headlineLarge!
+                      .copyWith(color: selected ? Colors.white : null),
+                )),
+
+                Text("${LocaleKeys.home_useby.tr()} : $useby")
+              ],
+            ),
           ),
         ),
       ),

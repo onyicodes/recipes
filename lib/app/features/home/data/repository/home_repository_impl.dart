@@ -37,9 +37,9 @@ class HomeRepositoryImpl extends HomeRepository {
   Future<Either<Failure, List<RecipeEntity>>> fetchRecipes(
       {required FetchRecipeParams params}) async {
     try {
-      List<RecipeEntity> dealEntityList =
+      List<RecipeEntity> recipesEntityList =
           await dataProvider.fetchRecipes(params: params);
-      return Right(dealEntityList);
+      return Right(recipesEntityList);
     } on ServerException {
       return Left(ServerFailure());
     } on NetworkException {

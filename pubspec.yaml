@@ -44,6 +44,9 @@ dependencies:
   dartz: ^0.10.1
   internet_connection_checker_plus: ^1.0.1
   mockito: ^5.4.0
+  loading_animation_widget: ^1.2.0+4
+  shimmer: ^2.0.0
+  flutter_smart_dialog: ^4.9.0+5
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +79,7 @@ flutter:
     - assets/translations/
     - assets/test_fixtures/
     - assets/svg/icons/
+    - assets/svg/error_icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

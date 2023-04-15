@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class FetchRecipeParams extends Equatable {
-  final List ingredients;
+  final String ingredients;
 
   const FetchRecipeParams(
       {required this.ingredients,});

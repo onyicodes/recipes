@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:recipes/app/features/home/presentation/controllers/home_controller.dart';
 import 'package:recipes/app/features/home/presentation/widgets/ingredient_builder.dart';
+import 'package:recipes/core/constants/general_constants.dart';
 import 'package:recipes/core/general_widgets/custom_appbar.dart';
+import 'package:recipes/core/general_widgets/custom_list_space.dart';
 import 'package:recipes/generated/locale_keys.g.dart';
 
 class Home extends GetView<HomeController> {
@@ -22,7 +24,7 @@ class Home extends GetView<HomeController> {
         floatingActionButton: GetBuilder<HomeController>(builder: (_) {
           return FloatingActionButton(
             backgroundColor: Theme.of(context).iconTheme.color,
-            tooltip: LocaleKeys.home_findRecipes.tr(),
+            tooltip: LocaleKeys.home_toolTip_findRecipes.tr(),
             onPressed: () {
               _.goToRecipes();
             },
@@ -64,7 +66,7 @@ class Home extends GetView<HomeController> {
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(12))),
                           child: Text(
-                            _.date.toIso8601String(),
+                            _.date,
                             style: primaryTextTheme.bodyLarge,
                           ),
                         ),
@@ -73,7 +75,8 @@ class Home extends GetView<HomeController> {
                   ],
                 ),
               ),
-              const IngredientBuilder()
+              const IngredientBuilder(),
+              CustomListSpacing(spacingValue: ListSpacingValue.spacingV32.value)
             ],
           );
         }));

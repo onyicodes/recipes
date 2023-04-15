@@ -1,8 +1,11 @@
 import 'package:get/get.dart';
 import 'package:recipes/app/features/home/domain/entities/recipe_entity.dart';
 import 'package:recipes/app/features/home/domain/usecases/fetch_recipes_usecase.dart';
+import 'package:recipes/core/constants/failure_to_error_message.dart';
 import 'package:recipes/core/constants/general_constants.dart';
 import 'package:recipes/core/parameters/fetch_recipe_params.dart';
+import 'package:recipes/core/util/custom_smart_loading.dart';
+import 'package:recipes/generated/locale_keys.g.dart';
 
 class RecipeController extends GetxController {
   final FetchRecipesUsecase fetchRecipesUsecase;
@@ -12,12 +15,14 @@ class RecipeController extends GetxController {
   final _recipesRequestStatus = RequestStatus.initial.obs;
 
   final _recipes = <RecipeEntity>[].obs;
+  final _errorMessage = "".obs;
 
   List<RecipeEntity> get recipes => _recipes;
   RequestStatus get recipesRequestStatus => _recipesRequestStatus.value;
-
+  String get errorMessage => _errorMessage.value;
+  
   set recipes(value) => _recipes.value = value;
-
+  set errorMessage(value) => _errorMessage.value = value;
   set recipesRequestStatus(value) => _recipesRequestStatus.value = value;
 
   List selectedIngredients = [];
@@ -32,10 +37,13 @@ class RecipeController extends GetxController {
   getRecipes() async {
     recipesRequestStatus = RequestStatus.loading;
     final fetchRecipesParams =
-        FetchRecipeParams(ingredients: selectedIngredients);
+        FetchRecipeParams(ingredients: selectedIngredients.join(",").trim());
     final failOrFetchRecipes = await fetchRecipesUsecase(fetchRecipesParams);
     failOrFetchRecipes.fold((fail) {
       recipesRequestStatus = RequestStatus.error;
+     errorMessage = mapFailureToErrorMessage(fail);
+
+      
     }, (recipesList) {
       recipes = recipesList;
       recipesRequestStatus = RequestStatus.success;

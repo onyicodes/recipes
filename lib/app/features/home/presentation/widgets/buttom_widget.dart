@@ -9,16 +9,19 @@ import 'package:recipes/generated/locale_keys.g.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
 
 class CustomBottomSheetWidget extends StatelessWidget {
-  final void Function()? onTap2;
+  
   final void Function(DateTime value) onTimeChanged;
   final void Function(DateTime value) onSelectToday;
+  final void Function() onCanel;
+  final void Function() onDone;
   final DateTime selectedDate;
   const CustomBottomSheetWidget({
     Key? key,
     required this.onSelectToday,
     required this.onTimeChanged,
     required this.selectedDate,
-    this.onTap2,
+    required this.onCanel,
+    required this.onDone
   }) : super(key: key);
 
   @override
@@ -28,7 +31,7 @@ class CustomBottomSheetWidget extends StatelessWidget {
       filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
       child: Container(
         padding: const EdgeInsets.all(8),
-        height: 350,
+        height: 300,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(16), topRight: Radius.circular(16)),
@@ -37,11 +40,18 @@ class CustomBottomSheetWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomButton(label: LocaleKeys.home_bottomWidget_today.tr(), onPressed: (){
-              DateTime now = DateTime.now();
-              onSelectToday(now);
-            }, backgroundColor: Colors.teal, borderColor: Colors.teal, primaryTextTheme: primaryTextTheme),
-            CustomListSpacing(spacingValue: ListSpacingValue.spacingV24.value),
+            CustomButton(
+                width: 200,
+                height: 40,
+                label: LocaleKeys.button_today.tr(),
+                onPressed: () {
+                  DateTime now = DateTime.now();
+                  onSelectToday(now);
+                },
+                backgroundColor: Colors.teal,
+                borderColor: Colors.teal,
+                primaryTextTheme: primaryTextTheme),
+            CustomListSpacing(spacingValue: ListSpacingValue.spacingV8.value),
             SizedBox(
               height: 150,
               child: ScrollDatePicker(
@@ -49,6 +59,34 @@ class CustomBottomSheetWidget extends StatelessWidget {
                 onDateTimeChanged: onTimeChanged,
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CustomButton(
+                      width: 120,
+                      height: 40,
+                      textColor: Theme.of(context).secondaryHeaderColor,
+                      label: LocaleKeys.button_cancel.tr(),
+                      onPressed:onCanel,
+                      backgroundColor: Theme.of(context).cardColor,
+                      borderColor: Colors.teal,
+                      primaryTextTheme: primaryTextTheme),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  CustomButton(
+                      width: 100,
+                      height: 40,
+                      label: LocaleKeys.button_done.tr(),
+                      onPressed:onDone,
+                      backgroundColor: Theme.of(context).primaryColor,
+                      borderColor: Theme.of(context).primaryColor,
+                      primaryTextTheme: primaryTextTheme),
+                ],
+              ),
+            )
           ],
         ),
       ),

@@ -22,7 +22,7 @@ class SplashScreenPage extends GetView<SplashScreenController> {
                 child:SizedBox(
                   width: 150,
                   height: 150,
-                  child: Icon(Icons.food_bank_rounded)))
+                  child: Icon(Icons.food_bank_rounded, size: 100,)))
           ],
         ),
       ),

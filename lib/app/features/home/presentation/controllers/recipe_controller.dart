@@ -25,11 +25,17 @@ class RecipeController extends GetxController {
   set recipesRequestStatus(value) => _recipesRequestStatus.value = value;
 
   List selectedIngredients = [];
+  late Worker worker;
 
   @override
   void onInit() {
     selectedIngredients.addAll(Get.arguments);
     getRecipes();
+    worker = ever(_recipesRequestStatus, (value) {
+      if(recipesRequestStatus== RequestStatus.error){
+        customSnackbar(title: "Error", message: errorMessage, isError: true);
+      }
+    });
     super.onInit();
   }
 
@@ -39,10 +45,9 @@ class RecipeController extends GetxController {
         FetchRecipeParams(ingredients: selectedIngredients.join(",").trim());
     final failOrFetchRecipes = await fetchRecipesUsecase(fetchRecipesParams);
     failOrFetchRecipes.fold((fail) {
-      recipesRequestStatus = RequestStatus.error;
+      
      errorMessage = mapFailureToErrorMessage(fail);
-      //Comment snackbar below out for unit test to run smoothly
-      customSnackbar(title: "Error", message: mapFailureToErrorMessage(fail), isError: true);
+     recipesRequestStatus = RequestStatus.error;
       
     }, (recipesList) {
       recipes = recipesList;

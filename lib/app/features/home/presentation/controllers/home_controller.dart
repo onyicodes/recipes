@@ -39,11 +39,18 @@ class HomeController extends GetxController {
   set selectedIngredients(value) => _selectedIngredients.value = value;
   set ingredientsRequestStatus(value) =>
       _ingredientsRequestStatus.value = value;
+  late Worker worker;
 
   @override
   void onReady() {
     datePicker();
     super.onReady();
+
+    worker = ever(_ingredientsRequestStatus, (value) {
+      if(ingredientsRequestStatus== RequestStatus.error){
+        customSnackbar(title: "Error", message: errorMessage, isError: true);
+      }
+    });
   }
 
   datePicker() async {
@@ -85,10 +92,11 @@ class HomeController extends GetxController {
     ingredientsRequestStatus = RequestStatus.loading;
     final failOrFetchIngredients = await fetchIngredientsUsecase(NoParams());
     failOrFetchIngredients.fold((fail) {
-      ingredientsRequestStatus = RequestStatus.error;
+      
       errorMessage = mapFailureToErrorMessage(fail);
+      ingredientsRequestStatus = RequestStatus.error;
       //Comment snackbar below out for unit test to run smoothly
-      customSnackbar(title: "Error", message: mapFailureToErrorMessage(fail), isError: true);
+      
     }, (ingredientsList) {
       ingredients = ingredientsList;
       ingredientsRequestStatus = RequestStatus.success;
